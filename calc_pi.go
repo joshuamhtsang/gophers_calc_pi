@@ -1,7 +1,13 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+
+	"github.com/joshuamhtsang/gophers_calc_pi/geometry"
+)
 
 func main() {
-	fmt.Println("Gohpers Calculate Pi!")
+	fmt.Println("Gophers Calculate Pi!")
+
+	fmt.Println(geometry.WithinUnitCircle(0.5, 0.5))
 }
