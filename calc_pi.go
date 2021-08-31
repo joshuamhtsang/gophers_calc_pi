@@ -3,17 +3,23 @@ package main
 import (
 	"fmt"
 	"math/rand"
+	"flag"
 	"github.com/joshuamhtsang/gophers_calc_pi/geometry"
 )
 
 func main() {
 	fmt.Println("Gophers Calculate Pi!")
 
+	// Parse arguments
+	numIterationsPtr := flag.Int("n", 500, "Number of iterations.")
+	flag.Parse()
+	fmt.Println(*numIterationsPtr)
+
 	fmt.Println(geometry.WithinUnitCircle(0.5, 0.5))
 
 	rand.Seed(45)
 
-	fmt.Println(estimate_pi(10000))
+	fmt.Println(estimate_pi((*numIterationsPtr)))
 }
 
 func estimate_pi(num_iterations int) float64 {
