@@ -20,6 +20,29 @@ func main() {
 	rand.Seed(45)
 
 	fmt.Println(estimatePi((*numIterationsPtr)))
+
+	// Calculate with go routines.
+	estimate_10 := make(chan float64)
+	estimate_100 := make(chan float64)
+	estimate_1000 := make(chan float64)
+	estimate_10000 := make(chan float64)
+	estimate_10000000 := make(chan float64)
+	go goEstimatePi(10, estimate_10)
+	go goEstimatePi(100, estimate_100)
+	go goEstimatePi(1000, estimate_1000)
+	go goEstimatePi(10000, estimate_10000)
+	go goEstimatePi(10000000, estimate_10000000)
+	fmt.Println("estimates from 10000000: ", <-estimate_10000000)
+	fmt.Println("estimates from 10: ", <-estimate_10)
+	fmt.Println("estimates from 100: ", <-estimate_100)
+	fmt.Println("estimates from 1000: ", <-estimate_1000)
+	fmt.Println("estimates from 10000: ", <-estimate_10000)
+	
+}
+
+func goEstimatePi(num_iterations int, estimates chan float64) {
+	estimate := estimatePi(num_iterations)
+	estimates <- estimate
 }
 
 func estimatePi(num_iterations int) float64 {
