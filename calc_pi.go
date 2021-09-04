@@ -34,6 +34,9 @@ func main() {
 	
 }
 
+// Golang does not allow a function initiated as a go routine 'go xxx()'
+// to return anything.  Hence this wrapping function which accepts
+// a channel.
 func goEstimatePi(num_iterations int, estimates chan float64) {
 	fmt.Printf("Starting on  %d interations\n", num_iterations)
 	estimate := estimatePi(num_iterations)
