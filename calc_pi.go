@@ -19,10 +19,10 @@ func main() {
 
 	rand.Seed(45)
 
-	fmt.Println(estimate_pi((*numIterationsPtr)))
+	fmt.Println(estimatePi((*numIterationsPtr)))
 }
 
-func estimate_pi(num_iterations int) float64 {
+func estimatePi(num_iterations int) float64 {
 	var inside_quadrant = make([]bool, num_iterations)
 
 	for i := 0; i < num_iterations; i++ {
@@ -32,12 +32,12 @@ func estimate_pi(num_iterations int) float64 {
 		inside_quadrant[i] = geometry.WithinUnitCircle(x_test, y_test)
 	}
 
-	var fraction_inside float64 = compute_fraction_inside(inside_quadrant)
+	var fraction_inside float64 = computeFractionInside(inside_quadrant)
 
 	return 4*fraction_inside
 }
 
-func compute_fraction_inside(inside []bool) float64 {
+func computeFractionInside(inside []bool) float64 {
 	var num_inside int = 0
 	var num_samples int = len(inside)
 
